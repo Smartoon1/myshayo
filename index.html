@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    /* Envelope */
+    .envelope {
+      width: 260px;
+      height: 180px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 130px solid transparent;
+      border-right: 130px solid transparent;
+      border-top: 90px solid #ff6b81;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+    }
+
+    /* Letter */
+    .letter {
+      display: none;
+      background: #fff;
+      padding: 30px;
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+
+    .message {
+      display: none;
+      font-size: 20px;
+      margin-top: 15px;
+      animation: pop 0.6s ease;
+    }
+
+    video {
+  animation: pop 0.8s ease;
+  transition: opacity 0.6s ease;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+<div class="letter" id="passwordScreen" style="display:block;">
+  <h1>💌 Private Message</h1>
+  <p>Enter the password to continue</p>
+
+  <input
+    type="password"
+    id="passwordInput"
+    placeholder="Password..."
+    style="padding:10px; border-radius:20px; border:1px solid #ccc; width:80%; font-size:16px;"
+  />
+
+  <br><br>
+  <button class="yes" onclick="checkPassword()">Unlock 🔓</button>
+
+  <p id="passwordError" style="color:#ff4d6d; display:none; margin-top:10px;">
+    Wrong password 😏 Try again
+  </p>
+</div>
+
+    <!-- Envelope -->
+    <div class="envelope" id="envelope" style="display:none;">
+  <div class="heart">❤️</div>
+</div>
+
+
+    <!-- Letter -->
+    <div class="letter" id="letter">
+     <div id="videoContainer" style="margin-bottom:15px;">
+  
+  <!-- Question Video -->
+  <video id="questionVideo" width="100%" autoplay muted loop playsinline
+    style="border-radius:12px;">
+    <source src="c:\Users\hp\Videos\va.mp4" type="video/mp4">
+  </video>
+
+  <!-- YES Video -->
+  <video id="loveVideo" width="100%" playsinline
+    style="display:none; border-radius:12px;" autoplay muted loop playsinline>
+    <source src="c:\Users\hp\Videos\va2.mp4" type="video/mp4">
+  </video>
+
+</div>
+
+      <h1>Hey My Shayo  💕</h1>
+      <p>Will you be my Valentine?</p>
+      <button class="yes" onclick="yesAnswer()">Yes 💖</button>
+      <button class="no" onclick="noAnswer()">No 😳</button>
+
+      <div class="message" id="message"></div>
+    </div>
+
+  </div>
+
+ <script>
+  const correctPassword = "myshayo"; // 🔑 CHANGE THIS
+
+  const passwordScreen = document.getElementById("passwordScreen");
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordError = document.getElementById("passwordError");
+
+  const envelope = document.getElementById("envelope");
+  const letter = document.getElementById("letter");
+  const message = document.getElementById("message");
+
+  const questionVideo = document.getElementById("questionVideo");
+  const loveVideo = document.getElementById("loveVideo");
+
+  function checkPassword() {
+    if (passwordInput.value === correctPassword) {
+      passwordScreen.style.display = "none";
+      envelope.style.display = "block";
+    } else {
+      passwordError.style.display = "block";
+    }
+  }
+
+  envelope.addEventListener("click", () => {
+    envelope.style.display = "none";
+    letter.style.display = "block";
+  });
+
+  function yesAnswer() {
+    questionVideo.pause();
+    questionVideo.style.display = "none";
+
+    loveVideo.style.display = "block";
+    loveVideo.play();
+
+    message.style.display = "block";
+    message.innerHTML =
+      "Sure thing Babe i knew you would say yes<br>My Shayo, you just made me the happiest person ever. I love you endlessly 😘❤️";
+
+    document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
+  }
+
+  function noAnswer() {
+    message.style.display = "block";
+    message.innerHTML =
+      "Na Babe😏<br>You already know the answer is YES ❤️";
+  }
+</script>
+
+</body>
+</html>
